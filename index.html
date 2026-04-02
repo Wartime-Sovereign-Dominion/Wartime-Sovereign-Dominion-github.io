@@ -1942,82 +1942,29 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-2 select-none">
 
-    <div id="econ-unlock-banner">💰 ECONOMY UNLOCKED — Place buildings fast! +12g/s baseline + supply drops!</div>
-
-    <!-- ── ACCOUNT BUTTON (shown on main menu) ── -->
-    <button id="account-btn" onclick="openAccountModal()" style="display:none;">👤 <span id="account-btn-label">SIGN IN</span></button>
-
-    <!-- ── ACCOUNT MODAL ── -->
-    <div id="account-modal">
-        <div class="acc-box">
-            <div class="acc-title">⚔️ WARTIME ID</div>
-            <div class="acc-sub" id="acc-modal-sub">Your Commander Profile</div>
-
-            <!-- Auth View (shown when not logged in) -->
-            <div id="acc-auth-view">
-                <div class="acc-tab-row">
-                    <button class="acc-tab active" id="acc-tab-login" onclick="accShowTab('login')">SIGN IN</button>
-                    <button class="acc-tab" id="acc-tab-register" onclick="accShowTab('register')">CREATE ACCOUNT</button>
-                </div>
-                <div id="acc-error" class="acc-error"></div>
-                <div id="acc-success-msg" class="acc-success"></div>
-
-                <div id="acc-login-form">
-                    <input class="acc-input" type="text" id="acc-login-user" placeholder="Username" maxlength="20" autocomplete="off">
-                    <input class="acc-input" type="password" id="acc-login-pass" placeholder="Password" maxlength="40">
-                    <button class="acc-btn" onclick="accLogin()">SIGN IN →</button>
-                </div>
-
-                <div id="acc-register-form" style="display:none">
-                    <input class="acc-input" type="text" id="acc-reg-user" placeholder="Choose a username (3–20 chars)" maxlength="20" autocomplete="off">
-                    <input class="acc-input" type="password" id="acc-reg-pass" placeholder="Password (min 6 chars)" maxlength="40">
-                    <input class="acc-input" type="password" id="acc-reg-pass2" placeholder="Confirm password" maxlength="40">
-                    <button class="acc-btn" onclick="accRegister()">CREATE ACCOUNT 🎖️</button>
-                </div>
-
-                <button onclick="closeAccountModal()" style="width:100%;background:transparent;border:1px solid #3f3f46;color:#52525b;border-radius:8px;padding:9px;font-size:11px;cursor:pointer;margin-top:10px;font-family:'Black Ops One',cursive;">← BACK</button>
-            </div>
-
-            <!-- Profile View (shown when logged in) -->
-            <div id="acc-profile-view" style="display:none">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px;background:#111;border-radius:10px;border:1px solid #27272a;">
-                    <div id="acc-avatar" style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;color:white;flex-shrink:0;"></div>
-                    <div>
-                        <div id="acc-profile-name" style="font-family:'Black Ops One',cursive;font-size:16px;color:#e2e8f0;"></div>
-                        <div id="acc-profile-stats" style="font-size:10px;color:#52525b;margin-top:2px;"></div>
-                    </div>
-                </div>
-
-                <!-- Friend Code -->
-                <div class="acc-section-title">Your Friend Code</div>
-                <div class="friend-code-box">
-                    <div class="friend-code-val" id="acc-friend-code" onclick="copyFriendCode()" style="cursor:pointer;user-select:all;" title="Click to copy">----</div>
-                    <div class="friend-code-label">Tap to copy · Share with friends on this device</div>
-                    <button onclick="copyFriendCode()" style="margin-top:6px;background:#18181b;border:1px solid #3f3f46;color:#71717a;border-radius:6px;padding:4px 12px;font-size:10px;cursor:pointer;font-family:'Black Ops One',cursive;">📋 COPY CODE</button>
-                </div>
-
-                <!-- Add Friend -->
-                <div class="acc-section-title">Add Friend</div>
-                <div style="font-size:10px;color:#52525b;margin-bottom:6px;">Both accounts must exist on this device</div>
-                <div style="display:flex;gap:6px;margin-bottom:8px;">
-                    <input class="acc-input" type="text" id="acc-add-friend-input" placeholder="Enter 6-char friend code" maxlength="6" style="margin-bottom:0;flex:1;text-transform:uppercase;letter-spacing:2px;" autocomplete="off" oninput="this.value=this.value.toUpperCase()">
-                    <button onclick="accAddFriend()" style="background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:8px;padding:0 14px;color:#4ade80;font-family:'Black Ops One',cursive;font-size:11px;cursor:pointer;white-space:nowrap;">ADD +</button>
-                </div>
-                <div id="acc-friend-msg" class="acc-success" style="margin-bottom:10px;"></div>
-                <div id="acc-friend-err" class="acc-error" style="margin-bottom:10px;"></div>
-
-                <!-- Friends List -->
-                <div class="acc-section-title">Friends (<span id="acc-friend-count">0</span>)</div>
-                <div id="acc-friends-list" style="max-height:140px;overflow-y:auto;margin-bottom:14px;">
-                    <div style="color:#52525b;font-size:11px;text-align:center;padding:10px;">No friends yet — share your code!</div>
-                </div>
-
-                <!-- Logout -->
-                <button onclick="accLogout()" style="width:100%;background:transparent;border:1px solid #7f1d1d;color:#f87171;border-radius:8px;padding:9px;font-size:11px;cursor:pointer;font-family:'Black Ops One',cursive;">SIGN OUT</button>
-                <button onclick="closeAccountModal()" style="width:100%;background:transparent;border:1px solid #3f3f46;color:#52525b;border-radius:8px;padding:9px;font-size:11px;cursor:pointer;margin-top:8px;font-family:'Black Ops One',cursive;">← BACK TO GAME</button>
-            </div>
-        </div>
+    <!-- ── PLATFORM DISCLAIMER ── -->
+    <div id="platform-disclaimer" style="
+        position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+        background: linear-gradient(135deg, #1c1400, #2d1f00);
+        border-bottom: 2px solid #b45309;
+        color: #f59e0b;
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        text-align: center;
+        padding: 8px 40px 8px 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+        line-height: 1.5;
+    ">
+        ⚠️ <strong>If you are playing on CrazyGames or any other platform</strong>, make sure to use <em>that platform's fullscreen option</em> — or most functions will not work.
+        <button onclick="document.getElementById('platform-disclaimer').style.display='none'" style="
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            background: transparent; border: 1px solid #b45309; color: #f59e0b;
+            border-radius: 4px; padding: 2px 8px; cursor: pointer; font-size: 11px;
+            font-weight: bold;
+        ">✕</button>
     </div>
+
+    <div id="econ-unlock-banner">💰 ECONOMY UNLOCKED — Place buildings fast! +12g/s baseline + supply drops!</div>
 
     <!-- ── BATTLE INTRO CARD ── -->
     <div id="battle-intro">
@@ -2085,7 +2032,6 @@
 
         <div class="w-full max-w-md mb-2 flex justify-between px-2 items-center">
             <div class="flex flex-col items-start gap-0.5">
-                <button onclick="openMPSelect()" class="bg-zinc-900 border border-yellow-600 text-yellow-500 army-font px-4 py-1.5 rounded-lg text-[11px] hover:bg-zinc-800 transition-colors">⚔️ 2 PLAYER</button>
                 <button onclick="openLongMatch()" class="mt-1 bg-zinc-900 border border-red-800 text-red-400 army-font px-4 py-1.5 rounded-lg text-[11px] hover:bg-zinc-800 transition-colors" style="border-image:none;box-shadow:0 0 8px rgba(220,38,38,0.3)">🗺️ LONG MATCH</button>
                 <div class="text-[8px] text-zinc-500 leading-tight" style="max-width:130px">20-30 min · Grid conquest</div>
                 <button onclick="openGameModes()" class="mt-1 bg-zinc-900 border border-purple-700 text-purple-400 army-font px-4 py-1.5 rounded-lg text-[11px] hover:bg-zinc-800 transition-colors">⚡ GAME MODES</button>
@@ -2299,6 +2245,142 @@
             </div>
         </div>
 
+        <!-- ── FOOTER LINKS ── -->
+        <div style="display:flex;gap:14px;margin-top:10px;justify-content:center;align-items:center;">
+            <button onclick="document.getElementById('credits-modal').style.display='flex'" style="background:transparent;border:none;color:#3f3f46;font-size:9px;font-family:'Black Ops One',cursive;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='#71717a'" onmouseout="this.style.color='#3f3f46'">🎮 Credits</button>
+            <span style="color:#27272a;font-size:10px;">|</span>
+            <button onclick="document.getElementById('tnc-modal').style.display='flex'" style="background:transparent;border:none;color:#3f3f46;font-size:9px;font-family:'Black Ops One',cursive;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='#71717a'" onmouseout="this.style.color='#3f3f46'">📜 Terms &amp; Conditions</button>
+        </div>
+
+    </div>
+
+    <!-- ── CREDITS MODAL ── -->
+    <div id="credits-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:16px;">
+        <div style="background:linear-gradient(135deg,#0d0d12,#18181b);border:2px solid #b45309;border-radius:16px;padding:24px;max-width:380px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(180,83,9,0.3);">
+            <!-- Close -->
+            <button onclick="document.getElementById('credits-modal').style.display='none'" style="position:absolute;top:10px;right:12px;background:#18181b;border:1px solid #3f3f46;color:#71717a;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:'Black Ops One',cursive;">✕</button>
+
+            <!-- Title -->
+            <div style="text-align:center;margin-bottom:18px;">
+                <div style="font-size:32px;margin-bottom:6px;">🎮</div>
+                <div style="font-family:'Black Ops One',cursive;font-size:20px;color:#f59e0b;letter-spacing:3px;text-shadow:0 0 20px rgba(245,158,11,0.5);">CREDITS</div>
+                <div style="font-size:9px;color:#52525b;text-transform:uppercase;letter-spacing:2px;margin-top:3px;">WARTIME: Sovereign Dominion</div>
+            </div>
+
+            <!-- Studio card -->
+            <div style="background:linear-gradient(135deg,#1a0a00,#2d1500);border:2px solid #b45309;border-radius:12px;padding:16px;margin-bottom:16px;text-align:center;position:relative;overflow:hidden;">
+                <div style="position:absolute;inset:0;background:repeating-linear-gradient(60deg,transparent,transparent 12px,rgba(180,83,9,0.04) 12px,rgba(180,83,9,0.04) 24px);pointer-events:none;"></div>
+                <div style="font-size:28px;margin-bottom:6px;">🫧</div>
+                <div style="font-family:'Black Ops One',cursive;font-size:18px;color:#f59e0b;letter-spacing:2px;">FIZZY STUDIOS</div>
+                <div style="font-size:9px;color:#92400e;text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Independent Game Studio</div>
+            </div>
+
+            <!-- Role cards -->
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+                <div style="background:#111;border:1px solid #27272a;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+                    <div style="font-size:22px;">💻</div>
+                    <div>
+                        <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#e2e8f0;letter-spacing:1px;">Developer</div>
+                        <div style="font-size:9px;color:#52525b;margin-top:1px;">Programming · Game Design · Logic · Everything Else</div>
+                    </div>
+                    <div style="margin-left:auto;font-size:9px;color:#f59e0b;font-family:'Black Ops One',cursive;">Fizzy</div>
+                </div>
+                <div style="background:#111;border:1px solid #27272a;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+                    <div style="font-size:22px;">🎨</div>
+                    <div>
+                        <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#e2e8f0;letter-spacing:1px;">Artist</div>
+                        <div style="font-size:9px;color:#52525b;margin-top:1px;">UI Design · Visuals · Art Direction</div>
+                    </div>
+                    <div style="margin-left:auto;font-size:9px;color:#f59e0b;font-family:'Black Ops One',cursive;">Fizzy</div>
+                </div>
+                <div style="background:#111;border:1px solid #27272a;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+                    <div style="font-size:22px;">🎵</div>
+                    <div>
+                        <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#e2e8f0;letter-spacing:1px;">Sound &amp; Music</div>
+                        <div style="font-size:9px;color:#52525b;margin-top:1px;">Audio · SFX · Ambience</div>
+                    </div>
+                    <div style="margin-left:auto;font-size:9px;color:#f59e0b;font-family:'Black Ops One',cursive;">Fizzy</div>
+                </div>
+                <div style="background:#111;border:1px solid #27272a;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+                    <div style="font-size:22px;">☕</div>
+                    <div>
+                        <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#e2e8f0;letter-spacing:1px;">Producer · QA · Marketing</div>
+                        <div style="font-size:9px;color:#52525b;margin-top:1px;">Testing · Balancing · Shipping</div>
+                    </div>
+                    <div style="margin-left:auto;font-size:9px;color:#f59e0b;font-family:'Black Ops One',cursive;">Also Fizzy</div>
+                </div>
+            </div>
+
+            <!-- Fun note -->
+            <div style="background:#0d1117;border:1px solid #1e3a5f;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:10px;color:#64748b;text-align:center;line-height:1.6;">
+                One developer. One artist. One person doing everything.<br>
+                <span style="color:#3b82f6;">...and yes, that's the same person. lol</span>
+            </div>
+
+            <div style="text-align:center;font-size:8px;color:#27272a;font-family:'Black Ops One',cursive;letter-spacing:2px;">© 2025 FIZZY STUDIOS · ALL RIGHTS RESERVED</div>
+
+            <button onclick="document.getElementById('credits-modal').style.display='none'" style="width:100%;margin-top:14px;background:linear-gradient(135deg,#1c1400,#2d1f00);border:2px solid #b45309;color:#f59e0b;border-radius:8px;padding:10px;font-family:'Black Ops One',cursive;font-size:12px;cursor:pointer;letter-spacing:1px;">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- ── TERMS & CONDITIONS MODAL ── -->
+    <div id="tnc-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;padding:16px;">
+        <div style="background:linear-gradient(135deg,#0d0d12,#18181b);border:2px solid #3b82f6;border-radius:16px;padding:24px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 0 60px rgba(59,130,246,0.25);">
+            <!-- Close -->
+            <button onclick="document.getElementById('tnc-modal').style.display='none'" style="position:absolute;top:10px;right:12px;background:#18181b;border:1px solid #3f3f46;color:#71717a;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:'Black Ops One',cursive;">✕</button>
+
+            <!-- Title -->
+            <div style="text-align:center;margin-bottom:18px;">
+                <div style="font-size:28px;margin-bottom:6px;">📜</div>
+                <div style="font-family:'Black Ops One',cursive;font-size:18px;color:#93c5fd;letter-spacing:2px;">TERMS &amp; CONDITIONS</div>
+                <div style="font-size:9px;color:#52525b;text-transform:uppercase;letter-spacing:2px;margin-top:3px;">WARTIME: Sovereign Dominion · Fizzy Studios</div>
+                <div style="font-size:8px;color:#3f3f46;margin-top:4px;">Last updated: 2025</div>
+            </div>
+
+            <!-- Sections -->
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:10px;color:#71717a;line-height:1.7;">
+
+                <div style="background:#111;border-left:3px solid #3b82f6;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#93c5fd;margin-bottom:4px;">1. INTELLECTUAL PROPERTY</div>
+                    WARTIME: Sovereign Dominion, including all game code, assets, design, artwork, UI, mechanics, characters, and content, is the exclusive intellectual property of <span style="color:#f59e0b;">Fizzy Studios</span>. All rights are reserved. Unauthorized copying, redistribution, modification, reverse engineering, or resale of this game or any portion of it — in whole or in part — is strictly prohibited without explicit written permission from Fizzy Studios.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #ef4444;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#f87171;margin-bottom:4px;">2. NO THEFT OR CLONING</div>
+                    You may not copy, clone, re-skin, or redistribute this game under a different name or brand. You may not pass off any portion of this game as your own work. Fizzy Studios reserves the right to pursue legal action against parties found to have plagiarized or stolen this game.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#4ade80;margin-bottom:4px;">3. PERMITTED USE</div>
+                    You are permitted to play this game for personal, non-commercial enjoyment. You may share the game's official URL with friends. You may stream or create video content featuring gameplay, provided you credit WARTIME: Sovereign Dominion by Fizzy Studios.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #a855f7;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#c084fc;margin-bottom:4px;">4. GAME DATA &amp; PROGRESS</div>
+                    Game progress is stored locally in your browser. Fizzy Studios is not responsible for loss of progress due to clearing browser data, switching devices, or any technical issue. No warranty is made regarding data persistence.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #f59e0b;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#fbbf24;margin-bottom:4px;">5. DISCLAIMER OF WARRANTIES</div>
+                    This game is provided "as is" without warranties of any kind. Fizzy Studios makes no guarantees regarding uninterrupted availability, freedom from bugs, or fitness for any particular purpose. Play at your own risk.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #52525b;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#a1a1aa;margin-bottom:4px;">6. CHANGES TO TERMS</div>
+                    Fizzy Studios reserves the right to update these terms at any time. Continued use of the game constitutes acceptance of any revised terms.
+                </div>
+
+                <div style="background:#111;border-left:3px solid #52525b;border-radius:0 8px 8px 0;padding:10px 14px;">
+                    <div style="font-family:'Black Ops One',cursive;font-size:11px;color:#a1a1aa;margin-bottom:4px;">7. CONTACT</div>
+                    For licensing inquiries, permission requests, or to report unauthorized use, please contact Fizzy Studios directly.
+                </div>
+
+            </div>
+
+            <div style="text-align:center;margin-top:14px;font-size:8px;color:#27272a;font-family:'Black Ops One',cursive;letter-spacing:2px;">© 2025 FIZZY STUDIOS · ALL RIGHTS RESERVED</div>
+
+            <button onclick="document.getElementById('tnc-modal').style.display='none'" style="width:100%;margin-top:14px;background:linear-gradient(135deg,#0f1e3d,#1e3a8a);border:2px solid #3b82f6;color:#93c5fd;border-radius:8px;padding:10px;font-family:'Black Ops One',cursive;font-size:12px;cursor:pointer;letter-spacing:1px;">I UNDERSTAND — CLOSE</button>
+        </div>
     </div>
 
     <!-- TRADE MODAL -->
@@ -2691,12 +2773,12 @@
     <script>
         const NATIONS = [
             { id:'nz', name:'New Zealand', minLvl:1, icon:'NZ', cards:[{n:'SAS Unit', c:4, i:'🪖', hp:320, d:45, r:35, s:0.5, role:'balanced'}, {n:'Maori Warrior', c:3, i:'🗿', hp:380, d:40, r:12, s:0.65, role:'tank'}]},
+			{ id: 'bar', name: 'Barbados', minLvl: 2, icon: 'BB', cards: [ { n: 'Pirate Barrage', c: 3, i: '🏴‍☠️', hp: 200, d: 50, r: 35, s: 0.5, role: 'rusher' },{ n: 'Rum Rush',       c: 3, i: '🍻',   hp: 200,  d: 80, r: 35, s: 1.5, role: 'balanced'}]},
             { id:'som', name:'Somaliland', minLvl:1, icon:'SOM', cards:[{n:'Technical', c:3, i:'🛻', hp:200, d:32, r:35, s:0.8, role:'balanced'}, {n:'Raider', c:2, i:'🏃', hp:130, d:15, r:10, s:0.85, role:'rusher'}]},
             { id:'dom', name:'Dominican Rep.', minLvl:1, icon:'DOM', cards:[{n:'Guardia', c:3, i:'🔫', hp:240, d:22, r:35, s:0.45, role:'balanced'}, {n:'Machete Squad', c:2, i:'⚔️', hp:190, d:30, r:10, s:0.6, role:'rusher'}]},
             { id:'chi', name:'Chile', minLvl:1, icon:'CHI', cards:[{n:'Mountain Guard', c:3, i:'🏔️', hp:400, d:18, r:15, s:0.35, role:'tank'}, {n:'Alpine Scout', c:2, i:'🎿', hp:150, d:12, r:45, s:0.6, role:'sniper'}]},
             { id:'bra', name:'Brazil', minLvl:2, icon:'BRA', cards:[{n:'Favela Fighter', c:2, i:'🔫', hp:160, d:22, r:25, s:0.8, role:'rusher'}, {n:'BOPE Operator', c:4, i:'🕶️', hp:310, d:42, r:38, s:0.65, role:'balanced'}]},
             { id:'mex', name:'Mexico', minLvl:2, icon:'MEX', cards:[{n:'Federale', c:3, i:'🤠', hp:260, d:28, r:30, s:0.55, role:'balanced'}, {n:'Cartel Enforcer', c:2, i:'💀', hp:170, d:35, r:15, s:0.75, role:'rusher'}]},
-			{ id: 'bar', name: 'Barbados', minLvl: 2, icon: 'BB', cards: [ { n: 'Pirate Barrage', c: 3, i: '🏴‍☠️', hp: 200, d: 50, r: 35, s: 0.5, role: 'rusher' },{ n: 'Rum Rush',       c: 3, i: '🍻',   hp: 200,  d: 80, r: 35, s: 1.5, role: 'balanced'}]},
             { id:'swi', name:'Switzerland', minLvl:3, icon:'SWI', cards:[{n:'Swiss Guard', c:4, i:'🛡️', hp:450, d:25, r:10, s:0.4, role:'tank'}, {n:'Alpine Sniper', c:4, i:'🎯', hp:140, d:55, r:65, s:0.3, role:'sniper'}]},
             { id:'kaz', name:'Kazakhstan', minLvl:3, icon:'KAZ', cards:[{n:'Horse Archer', c:3, i:'🏇', hp:220, d:35, r:40, s:0.75, role:'balanced'}, {n:'Steppe Raider', c:2, i:'🗡️', hp:140, d:28, r:10, s:0.7, role:'rusher'}]},
             { id:'vik', name:'Norway', minLvl:4, icon:'NOR', cards:[{n:'Viking Raider', c:3, i:'🪓', hp:340, d:44, r:14, s:0.7, role:'rusher'}, {n:'Longship Crew', c:4, i:'⛵', hp:300, d:38, r:32, s:0.65, role:'balanced'}]},
