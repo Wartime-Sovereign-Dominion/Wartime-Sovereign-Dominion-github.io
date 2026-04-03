@@ -2773,7 +2773,7 @@
     <script>
         const NATIONS = [
             { id:'nz', name:'New Zealand', minLvl:1, icon:'NZ', cards:[{n:'SAS Unit', c:4, i:'🪖', hp:320, d:45, r:35, s:0.5, role:'balanced'}, {n:'Maori Warrior', c:3, i:'🗿', hp:380, d:40, r:12, s:0.65, role:'tank'}]},
-			{ id: 'bar', name: 'Barbados', minLvl: 2, icon: 'BB', cards: [ { n: 'Pirate Barrage', c: 3, i: '🏴‍☠️', hp: 200, d: 50, r: 35, s: 0.5, role: 'rusher' },{ n: 'Rum Rush',       c: 3, i: '🍻',   hp: 200,  d: 80, r: 35, s: 1.5, role: 'balanced'}]},
+			{ id: 'bar', name: 'Barbados', minLvl: 2, icon: 'BB', cards: [ { n: 'Pirate Barrage', c: 3, i: '🏴‍☠️', hp: 200, d: 36, r: 35, s: 0.5, role: 'rusher' },{ n: 'Rum Rush',       c: 3, i: '🍻',   hp: 180,  d: 38, r: 35, s: 0.85, role: 'balanced'}]},
             { id:'som', name:'Somaliland', minLvl:1, icon:'SOM', cards:[{n:'Technical', c:3, i:'🛻', hp:200, d:32, r:35, s:0.8, role:'balanced'}, {n:'Raider', c:2, i:'🏃', hp:130, d:15, r:10, s:0.85, role:'rusher'}]},
             { id:'dom', name:'Dominican Rep.', minLvl:1, icon:'DOM', cards:[{n:'Guardia', c:3, i:'🔫', hp:240, d:22, r:35, s:0.45, role:'balanced'}, {n:'Machete Squad', c:2, i:'⚔️', hp:190, d:30, r:10, s:0.6, role:'rusher'}]},
             { id:'chi', name:'Chile', minLvl:1, icon:'CHI', cards:[{n:'Mountain Guard', c:3, i:'🏔️', hp:400, d:18, r:15, s:0.35, role:'tank'}, {n:'Alpine Scout', c:2, i:'🎿', hp:150, d:12, r:45, s:0.6, role:'sniper'}]},
@@ -7391,7 +7391,7 @@
                 baseInterval = 1400; // counter: medium-fast
             }
             // If player is dominating (lots more units), AI gets desperate and speeds up
-            if (playerPressure > 3) baseInterval = Math.max(700, baseInterval - playerPressure * 120);
+            if (playerPressure > 3) baseInterval = Math.max(1100, baseInterval - playerPressure * 60);
             // If AI is winning comfortably, it slows down to conserve
             if (playerPressure < -2 && eHQpct > 0.7) baseInterval = Math.min(3000, baseInterval + 400);
             // Apply general slowdown debuff if active
@@ -7427,7 +7427,7 @@
                         // When winning, save manpower for expensive powerful units
                         if (playerPressure < -1 && c.c >= 3) score += 15;
                         // Randomise slightly to avoid total predictability
-                        score += (Math.random() - 0.5) * 8;
+                        score += (Math.random() - 0.5) * 22;
 
                         return { card: c, score };
                     });
@@ -7440,10 +7440,12 @@
                     if (ai.laneShiftTimer > 12) {
                         ai.laneShiftTimer = 0;
                         if (ai.wavePhase === 3) {
-                            // Counter phase: attack where player is weakest
+                            // Counter phase: meant to attack weak side, but gets confused sometimes
                             const pXbuckets = [0,0,0]; // left/mid/right
                             pUnits.forEach(u => { pXbuckets[u.x < 35 ? 0 : u.x > 65 ? 2 : 1]++; });
-                            const minIdx = pXbuckets.indexOf(Math.min(...pXbuckets));
+                            const minIdx = Math.random() < 0.4
+                                ? Math.floor(Math.random() * 3)  // 40% chance: just pick random lane
+                                : pXbuckets.indexOf(Math.min(...pXbuckets));
                             ai.spawnLane = minIdx === 0 ? 0.2 : minIdx === 2 ? 0.8 : 0.5;
                         } else if (ai.wavePhase === 2) {
                             // Overwhelm: spread across all lanes
@@ -7484,7 +7486,7 @@
                     }
 
                     // ── Burst spawn in overwhelm phase (spend saved manpower) ──
-                    if (ai.wavePhase === 2 && state.eMan >= 6 && Math.random() < 0.35) {
+                    if (ai.wavePhase === 2 && state.eMan >= 6 && Math.random() < 0.2) {
                         const burstAffordable = state.eNat.cards.filter(c => c.c <= state.eMan);
                         if (burstAffordable.length > 0) {
                             const burstCard = burstAffordable[Math.floor(Math.random() * burstAffordable.length)];
